@@ -52,6 +52,7 @@ module.exports = {
     'no-cycle': 'off',
     'no-alert': 'off',
     'comma-dangle': 'off',
+    'operator-linebreak': 'off'
   },
   settings: {
     'import/parsers': {

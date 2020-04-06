@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { MdAddShoppingCart } from 'react-icons/md';
-
 import { formatPrice } from '../../util/format';
 import api from '../../services/api';
+
+import { ApplicationState } from '../../store';
+import { CartsData } from '../../store/modules/cart/types';
+import * as CartActions from '../../store/modules/cart/actions';
 
 import DetailProduct from '../../components/DetailProduct';
 import {
@@ -13,27 +17,16 @@ import {
   ButtonAddCart,
 } from './styles';
 
-interface Cart {
-  id: number;
-  picture: string;
-  description: string;
-  title: string;
-  price: number;
-  chipType: string;
-  memory: string;
-  brand: string;
-  priceFormatted: string;
-  amount: number;
-}
-
 export default function Home() {
   const [open, setOpen] = useState(false);
-  const [products, setProducts] = useState<Cart[]>();
-  const [productDialog, setProductDialog] = useState<Cart>();
+  const [products, setProducts] = useState<CartsData[]>();
+  const [productDialog, setProductDialog] = useState<CartsData>();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function loadProducts() {
-      const response = await api.get<Cart[]>('/products');
+      const response = await api.get<CartsData[]>('/products');
 
       const data = response.data.map((product) => ({
         ...product,
@@ -47,9 +40,19 @@ export default function Home() {
     loadProducts();
   }, []);
 
-  // function handleAddProduct(id: number) { }
+  const amount = useSelector((state: ApplicationState) =>
+    state.cart.data.reduce((sumAmount, product) => {
+      sumAmount[product.id] = product.amount;
 
-  function handleOpenDialog(product: Cart) {
+      return sumAmount;
+    }, {})
+  );
+
+  function handleAddProduct(id: number) {
+    dispatch(CartActions.addToCartRequest(id));
+  }
+
+  function handleOpenDialog(product: CartsData) {
     setProductDialog(product);
     setOpen(true);
   }
@@ -66,24 +69,25 @@ export default function Home() {
         callbackParent={() => onChildChanged()}
       />
       <ListProduct>
-        {products?.map((product: Cart) => (
-          <Product key={String(product.id)}>
-            <ButtonProduct
-              type="button"
-              onClick={() => handleOpenDialog(product)}
-            >
+        {products?.map((item) => (
+          <Product key={String(item.id)}>
+            <ButtonProduct type="button" onClick={() => handleOpenDialog(item)}>
               <div>
-                <img src={product.picture} alt={product.brand} />
+                <img src={item.picture} alt={item.brand} />
                 <div>
-                  <strong>{product.brand}</strong>
-                  <strong>{product.memory}</strong>
-                  <span>{product.priceFormatted}</span>
+                  <strong>{item.brand}</strong>
+                  <strong>{item.memory}</strong>
+                  <span>{item.priceFormatted}</span>
                 </div>
               </div>
             </ButtonProduct>
-            <ButtonAddCart type="button">
+            <ButtonAddCart
+              type="button"
+              onClick={() => handleAddProduct(item.id)}
+            >
               <div>
-                <MdAddShoppingCart size={16} color="#FFF" />1
+                <MdAddShoppingCart size={16} color="#FFF" />
+                {amount[item.id] || 0}
               </div>
               <span>COMPRAR</span>
             </ButtonAddCart>
