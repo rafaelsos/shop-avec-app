@@ -4,6 +4,7 @@ import { MdAddShoppingCart } from 'react-icons/md';
 import { formatPrice } from '../../util/format';
 import api from '../../services/api';
 
+import DetailProduct from '../../components/DetailProduct';
 import {
   Container,
   ListProduct,
@@ -18,6 +19,7 @@ interface Cart {
   description: string;
   title: string;
   price: number;
+  chipType: string;
   memory: string;
   brand: string;
   priceFormatted: string;
@@ -25,7 +27,9 @@ interface Cart {
 }
 
 export default function Home() {
+  const [open, setOpen] = useState(false);
   const [products, setProducts] = useState<Cart[]>();
+  const [productDialog, setProductDialog] = useState<Cart>();
 
   useEffect(() => {
     async function loadProducts() {
@@ -38,18 +42,36 @@ export default function Home() {
 
       setProducts(data);
     }
+    setOpen(false);
 
     loadProducts();
   }, []);
 
-  function handleAddProduct(id: number) { }
+  // function handleAddProduct(id: number) { }
+
+  function handleOpenDialog(product: Cart) {
+    setProductDialog(product);
+    setOpen(true);
+  }
+
+  function onChildChanged() {
+    setOpen(false);
+  }
 
   return (
     <Container>
+      <DetailProduct
+        openDialog={open}
+        product={productDialog}
+        callbackParent={() => onChildChanged()}
+      />
       <ListProduct>
-        {products?.map((product) => (
+        {products?.map((product: Cart) => (
           <Product key={String(product.id)}>
-            <ButtonProduct type="button" onClick={() => { }}>
+            <ButtonProduct
+              type="button"
+              onClick={() => handleOpenDialog(product)}
+            >
               <div>
                 <img src={product.picture} alt={product.brand} />
                 <div>
@@ -59,10 +81,7 @@ export default function Home() {
                 </div>
               </div>
             </ButtonProduct>
-            <ButtonAddCart
-              type="button"
-              onClick={() => handleAddProduct(product.id)}
-            >
+            <ButtonAddCart type="button">
               <div>
                 <MdAddShoppingCart size={16} color="#FFF" />1
               </div>
