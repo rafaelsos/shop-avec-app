@@ -19,6 +19,10 @@ export default createGlobalStyle`
     font: 14px Roboto, sans-serif;
   }
 
+  body, ul {
+    list-style: none;
+  }
+
   #root {
     max-width: 1020px;
     margin: 0 auto;
