@@ -67,7 +67,7 @@ export default function Cart() {
               </TableCell>
               <TableCell>
                 <strong>{item.title}</strong>
-                <span>{item.price}</span>
+                <span>{item.priceFormatted}</span>
               </TableCell>
               <TableCell>
                 <div>

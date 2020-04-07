@@ -70,7 +70,7 @@ export default function DetailProduct({
                 </TableCell>
                 <TableCell>
                   <Typography color="textSecondary">
-                    {product?.price}
+                    {product?.priceFormatted}
                   </Typography>
                 </TableCell>
               </TableRow>

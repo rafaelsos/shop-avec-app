@@ -14,3 +14,5 @@ export const updateAmountRequest = (id: number, amount: number) =>
 
 export const updateAmountSuccess = (id: number, amount: number) =>
   action(CartsTypes.UPDATE_AMOUNT_SUCCESS, id, amount);
+
+export const updateFailure = () => action(CartsTypes.UPDATE_FAILURE);
