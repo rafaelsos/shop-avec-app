@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Table,
   TableBody,
@@ -8,26 +9,15 @@ import {
   Dialog,
   Typography,
 } from '@material-ui/core';
-
 import { MdClose } from 'react-icons/md';
+
+import * as CartActions from '../../store/modules/cart/actions';
+import { CartsData } from '../../store/modules/cart/types';
 
 import { Title, DialogContent, DialogActions, Description } from './styles';
 
-interface Cart {
-  id: number;
-  picture: string;
-  description: string;
-  title: string;
-  price: number;
-  chipType: string;
-  memory: string;
-  brand: string;
-  priceFormatted: string;
-  amount: number;
-}
-
 interface Props {
-  product?: Cart;
+  product?: CartsData;
   openDialog: boolean;
   callbackParent: () => void;
 }
@@ -39,9 +29,17 @@ export default function DetailProduct({
 }: Props) {
   const [open, setOpen] = useState(false);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setOpen(openDialog);
   }, [openDialog]);
+
+  function handleAddProduct(id: number) {
+    dispatch(CartActions.addToCartRequest(id));
+
+    handleClose();
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -89,7 +87,7 @@ export default function DetailProduct({
         </DialogContent>
 
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={() => handleAddProduct(Number(product?.id))}>
             Comprar
           </Button>
         </DialogActions>

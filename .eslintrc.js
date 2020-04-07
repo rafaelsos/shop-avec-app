@@ -23,7 +23,7 @@ module.exports = {
   },
   plugins: ["react", "jsx-a11y", "import", "react-hooks", "prettier"],
   rules: {
-    "prettier/prettier": "error",
+
     'react/jsx-filename-extension': [
       'error',
       {
@@ -49,11 +49,9 @@ module.exports = {
     'implicit-arrow-linebreak': 'off',
     'function-paren-newline': 'off',
     'import/extensions': 'off',
-    'no-cycle': 'off',
-    'no-alert': 'off',
     'comma-dangle': 'off',
     'operator-linebreak': 'off',
-    'react/jsx-curly-newline': 'off'
+    'react/jsx-curly-newline': 'off',
   },
   settings: {
     'import/parsers': {

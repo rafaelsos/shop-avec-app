@@ -16,7 +16,7 @@ export const DialogContent = styled(MuiDialogContent)`
 
 export const Description = styled.div`
   h6 {
-    color: rgba(0, 0, 0, 0.87);
+    color: rgba(0, 0, 0, 0.8);
     margin-bottom: 8px;
   }
 `;
