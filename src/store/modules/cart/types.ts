@@ -24,6 +24,7 @@ export interface CartsData {
   chipType: string;
   priceFormatted: string;
   amount: number;
+  quantity: number;
 }
 
 /**

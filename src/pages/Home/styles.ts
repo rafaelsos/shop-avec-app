@@ -27,30 +27,58 @@ export const Product = styled.li`
 export const ButtonProduct = styled.button`
   border: 0;
   background: #fff;
+  margin: 10px;
 
   div {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    align-items: center;
 
     img {
-      padding: 20px;
+      width: 100%;
     }
 
     div {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 10px;
 
       strong {
-        font-size: 18px;
+        font-size: 14px;
         color: #333;
-        padding: 10px;
       }
 
       span {
-        font-size: 22px;
+        margin-top: 10px;
+        font-size: 20px;
         font-weight: bold;
-        padding: 10px;
+      }
+    }
+
+    @media all and (max-width: 350px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      img {
+        width: 60%;
+      }
+
+      div {
+        align-items: center;
+        font-size: 10px;
+
+        strong {
+          font-size: 10px;
+        }
+
+        span {
+          margin-top: 5px;
+          font-size: 10px;
+          font-weight: bold;
+        }
       }
     }
   }

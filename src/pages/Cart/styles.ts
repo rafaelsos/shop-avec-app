@@ -122,3 +122,15 @@ export const Total = styled.div`
     margin-left: 5px;
   }
 `;
+
+export const EmptyContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  strong {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 18px;
+  }
+`;

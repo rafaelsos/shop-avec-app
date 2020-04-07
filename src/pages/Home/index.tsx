@@ -73,10 +73,17 @@ export default function Home() {
           <Product key={String(item.id)}>
             <ButtonProduct type="button" onClick={() => handleOpenDialog(item)}>
               <div>
-                <img src={item.picture} alt={item.brand} />
+                <img
+                  src={item.picture}
+                  alt={item.brand}
+                  onError={(e) => {
+                    e.currentTarget.src =
+                      'https://imagens.canaltech.com.br/produto/1566226639-7141-principal-p.png';
+                    e.currentTarget.onerror = null;
+                  }}
+                />
                 <div>
-                  <strong>{item.brand}</strong>
-                  <strong>{item.memory}</strong>
+                  <strong>{item.title}</strong>
                   <span>{item.priceFormatted}</span>
                 </div>
               </div>

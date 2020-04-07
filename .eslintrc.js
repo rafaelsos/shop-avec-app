@@ -52,7 +52,8 @@ module.exports = {
     'no-cycle': 'off',
     'no-alert': 'off',
     'comma-dangle': 'off',
-    'operator-linebreak': 'off'
+    'operator-linebreak': 'off',
+    'react/jsx-curly-newline': 'off'
   },
   settings: {
     'import/parsers': {

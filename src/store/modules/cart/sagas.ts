@@ -1,7 +1,7 @@
 import { call, select, put, all, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
-import { CartsTypes, CartsState, CartsData } from './types';
+import { CartsTypes, CartsState } from './types';
 
 import api from '../../../services/api';
 import history from '../../../services/history';
@@ -21,7 +21,7 @@ export interface ApplicationState {
 
 function* addToCart({ payload }: ReturnType<typeof addToCartRequest>) {
   try {
-    const productExists: CartsData = yield select((state: ApplicationState) =>
+    const productExists = yield select((state: ApplicationState) =>
       state.cart.data.find((product) => product.id === payload)
     );
 

@@ -10,13 +10,13 @@ export const Container = styled.header`
   margin: 30px 0;
   background: #fff;
   padding: 0 5px;
+
+  a img {
+    width: 100%;
+  }
 `;
 
 export const Cart = styled(Link)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-decoration: none;
   transition: opacity 0.2s;
 
@@ -26,6 +26,5 @@ export const Cart = styled(Link)`
 `;
 
 export const StyledBadge = styled(Badge)`
-  background: transparent;
   padding: 0 4px;
 `;
