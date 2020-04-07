@@ -6,11 +6,21 @@ import { MdShoppingCart } from 'react-icons/md';
 
 import { ApplicationState } from '../../store';
 
-import { Container, Cart, StyledBadge } from './styles';
+import { formatPrice } from '../../util/format';
+import { Container, Cart, StyledBadge, Total } from './styles';
 
 export default function Header() {
   const cartSize = useSelector(
     (state: ApplicationState) => state.cart.data.length
+  );
+
+  const total = useSelector((state: ApplicationState) =>
+    formatPrice(
+      state.cart.data.reduce(
+        (totalSum, product) => totalSum + product.price * product.amount,
+        0
+      )
+    )
   );
 
   return (
@@ -27,6 +37,10 @@ export default function Header() {
             <MdShoppingCart size={30} color="#4b195f" />
           </StyledBadge>
         </IconButton>
+        <Total>
+          <span>TOTAL</span>
+          <strong>{total}</strong>
+        </Total>
       </Cart>
     </Container>
   );

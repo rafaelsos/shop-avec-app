@@ -17,6 +17,9 @@ export const Container = styled.header`
 `;
 
 export const Cart = styled(Link)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   text-decoration: none;
   transition: opacity 0.2s;
 
@@ -27,4 +30,21 @@ export const Cart = styled(Link)`
 
 export const StyledBadge = styled(Badge)`
   padding: 0 4px;
+`;
+
+export const Total = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 10px;
+
+  span {
+    color: #999;
+    font-weight: bold;
+  }
+
+  strong {
+    color: #4b195f;
+  }
 `;

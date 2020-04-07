@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
+import { darken } from 'polished';
 
 export const Title = styled.div`
   display: flex;
@@ -28,5 +29,10 @@ export const DialogActions = styled(MuiDialogActions)`
   button {
     background: #4b195f;
     color: #fff;
+    transition: background 0.2s;
+
+    &:hover {
+      background: ${darken(0.06, '#4b195f')};
+    }
   }
 `;

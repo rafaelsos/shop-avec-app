@@ -66,7 +66,15 @@ export default function Cart() {
               {cartProducts.map((item) => (
                 <TableRow key={String(item.id)}>
                   <TableCell component="th" scope="row">
-                    <img src={item.picture} alt="" />
+                    <img
+                      src={item.picture}
+                      alt={item.brand}
+                      onError={(e) => {
+                        e.currentTarget.src =
+                          'https://imagens.canaltech.com.br/produto/1566226639-7141-principal-p.png';
+                        e.currentTarget.onerror = null;
+                      }}
+                    />
                   </TableCell>
                   <TableCell>
                     <strong>{item.title}</strong>
