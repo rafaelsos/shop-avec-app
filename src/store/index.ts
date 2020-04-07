@@ -1,3 +1,5 @@
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import {
   createStore,
   Store,
@@ -20,7 +22,7 @@ const sagaMiddleware = createSagaMiddleware({
   sagaMonitor,
 });
 
-const enhancer: StoreEnhancer =
+const enhancer: StoreEnhancer<{}, CartsState> =
   process.env.NODE_ENV === 'development'
     ? compose(console.tron.createEnhancer(), applyMiddleware(sagaMiddleware))
     : applyMiddleware(sagaMiddleware);
@@ -29,8 +31,17 @@ export interface ApplicationState {
   cart: CartsState;
 }
 
-const store: Store<ApplicationState> = createStore(rootReducer, enhancer);
+const persistConfig = {
+  key: 'shopavec',
+  storage,
+  whitelist: ['cart'],
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store: Store<ApplicationState> = createStore(persistedReducer, enhancer);
+const persistor = persistStore(store);
 
 sagaMiddleware.run(rootSaga);
 
-export default store;
+export { store, persistor };
