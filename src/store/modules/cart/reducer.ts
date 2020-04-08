@@ -34,9 +34,6 @@ const reducer: Reducer<CartsState> = (state = INITIAL_STATE, action) =>
           (product) => product.id === action.payload
         );
 
-        console.tron.error(productIndex);
-        console.tron.error(action.meta);
-
         if (productIndex >= 0) {
           draft.error.valueOf();
           draft.loading.valueOf();
