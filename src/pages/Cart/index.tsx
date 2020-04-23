@@ -118,11 +118,11 @@ export default function Cart() {
           </footer>
         </>
       ) : (
-          <EmptyContainer>
-            <MdRemoveShoppingCart size={70} color="#eee" />
-            <strong>Seu carrinho está vazio.</strong>
-          </EmptyContainer>
-        )}
+        <EmptyContainer>
+          <MdRemoveShoppingCart size={70} color="#eee" />
+          <strong>Seu carrinho está vazio.</strong>
+        </EmptyContainer>
+      )}
     </Container>
   );
 }
